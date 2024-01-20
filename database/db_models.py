@@ -1,17 +1,11 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.schema import UniqueConstraint
-from sqlalchemy import Boolean, Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 
 Base = declarative_base()
 
 
-class Submission(Base):
-    """Collects information from a submission entry
-
-    Attributes:
-            id (int): Primary key, the submission id from Reddit
-    """
-
+class Submissions(Base):
     __tablename__ = "submissions"
     submission_id = Column(String, primary_key=True)
     subreddit_id = Column(String)
@@ -28,7 +22,7 @@ class Submission(Base):
     full_url = Column(String)
     locked = Column(Boolean)
     stickied = Column(Boolean)
-    gilded = Column(Boolean)
+    gilded = Column(Integer)
     over_18 = Column(Boolean)
 
     __table_args__ = (
@@ -36,12 +30,7 @@ class Submission(Base):
     )
 
 
-class Comment(Base):
-    """Collects information from a comment entry
-
-        Attributes:
-            id (int): Primary key, the comment id from Reddit
-    """
+class Comments(Base):
     __tablename__ = "comments"
     comment_id = Column(String, primary_key=True)
     parent_id = Column(String)
@@ -54,19 +43,14 @@ class Comment(Base):
     body = Column(String)
     edited = Column(DateTime)
     stickied = Column(Boolean)
-    gilded = Column(Boolean)
+    gilded = Column(Integer)
 
     __table_args__ = (
         UniqueConstraint('parent_id', 'author_name', 'post_time'),
     )
 
 
-class Subreddit(Base):
-    """Stores information at a subreddit level
-
-        Attributes:
-            id (int): Primary key, the subreddit id from Reddit
-    """
+class Subreddits(Base):
     __tablename__ = "subreddits"
     subreddit_id = Column(String, primary_key=True)
     subreddit_name = Column(String)
