@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 Base = declarative_base()
 
 
-class Submissions(Base):
+class Submission(Base):
     __tablename__ = "submissions"
     submission_id = Column(String, primary_key=True)
     subreddit_id = Column(String)
@@ -30,7 +30,7 @@ class Submissions(Base):
     )
 
 
-class Comments(Base):
+class Comment(Base):
     __tablename__ = "comments"
     comment_id = Column(String, primary_key=True)
     parent_id = Column(String)
@@ -50,7 +50,7 @@ class Comments(Base):
     )
 
 
-class Subreddits(Base):
+class Subreddit(Base):
     __tablename__ = "subreddits"
     subreddit_id = Column(String, primary_key=True)
     subreddit_name = Column(String)
