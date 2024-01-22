@@ -6,6 +6,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from database.db_models import Base
+
 load_dotenv()
 
 db_url = URL.create(
@@ -18,6 +20,7 @@ db_url = URL.create(
 )
 
 engine = create_engine(db_url)
+Base.metadata.create_all(engine)
 
 
 @contextmanager
