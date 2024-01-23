@@ -25,16 +25,13 @@ class Submission(Base):
     gilded = Column(Integer)
     over_18 = Column(Boolean)
 
-    __table_args__ = (
-        UniqueConstraint('subreddit_id', 'author_name', 'post_time'),
-    )
-
 
 class Comment(Base):
     __tablename__ = "comments"
     comment_id = Column(String, primary_key=True)
     parent_id = Column(String)
-    submission_id = Column(String, ForeignKey('submissions'))
+    submission_id = Column(String)
+    subreddit_id = Column(String)
     author_name = Column(String)
     score = Column(Integer)
     controversiality = Column(Boolean)
@@ -45,16 +42,8 @@ class Comment(Base):
     stickied = Column(Boolean)
     gilded = Column(Integer)
 
-    __table_args__ = (
-        UniqueConstraint('parent_id', 'author_name', 'post_time'),
-    )
-
 
 class Subreddit(Base):
     __tablename__ = "subreddits"
     subreddit_id = Column(String, primary_key=True)
     subreddit_name = Column(String)
-
-    __table_args__ = (
-        UniqueConstraint('subreddit_name'),
-    )
