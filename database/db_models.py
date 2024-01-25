@@ -47,3 +47,11 @@ class Subreddit(Base):
     __tablename__ = "subreddits"
     subreddit_id = Column(String, primary_key=True)
     subreddit_name = Column(String)
+
+
+class LoadedFiles(Base):
+    __tablename__ = "loaded_files"
+    id = Column(Integer, primary_key=True)
+    file_name = Column(String, unique=True, nullable=False)
+    processed_time = Column(DateTime)
+    file_size = Column(Integer)
