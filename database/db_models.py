@@ -1,6 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.schema import UniqueConstraint
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import BigInteger, Boolean, Column, DateTime, Integer, String
 
 Base = declarative_base()
 
@@ -54,4 +53,4 @@ class LoadedFiles(Base):
     id = Column(Integer, primary_key=True)
     file_name = Column(String, unique=True, nullable=False)
     processed_time = Column(DateTime)
-    file_size = Column(Integer)
+    file_size = Column(BigInteger)
